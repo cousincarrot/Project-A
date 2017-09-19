@@ -1,4 +1,4 @@
-# Project-A
+# Project-A!
 1st self-assigned project! Help me make the code more elegant!
 
 I am a new programmer with an art background. I know a little HTML and am getting into JavaScript.

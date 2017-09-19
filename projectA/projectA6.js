@@ -74,7 +74,7 @@ document.getElementById("myCanvas").onmouseout  = function() {
   }
   setIdentifyFileTrue();
 
-
+//This is the meat and potatoes
   function anim(){
       if (identifyFile == true && isHoveringOver == true) {
 

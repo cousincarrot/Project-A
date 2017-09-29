@@ -7,7 +7,7 @@ var currentX = 0;
 var animDelay = 250;
 var isHoveringOver = false;
 //this is an important boolean that gives feedback that a file is an animation
-//and we run a bunch of if/then statements below when it is set to true
+//and we run a bunch of if/then statements, the "meat and potatoes" below when it is set to true
 // this is in the anim function
 var identifyFile = false;
 //set cell position 0 through 9
@@ -35,7 +35,30 @@ console.log("Inside flowerAnim.onload");
   createCanvas.setAttribute("height", "50px");
   createCanvas.style = "border:1px solid #d3d3d3";
 
+  createCanvas.addEventListener("touchstart", touchFeedback, false);
+  //createCanvas.addEventListener("touchend", touchFeedback, false); //not needed in this wacky case
+  console.log("touche initialized");
+
+  //Guessing the touch on the canvas works and calls both touchstart and onmouseover
+  var initialTouch = false;
+
+  function touchFeedback() {
+    console.log("inside of touchfeedback"); //test for funtion working
+
+    if (initialTouch == false) {
+      initialTouch = true;
+      isHoveringOver = true;
+
+    }
+    else if (initialTouch == true){
+      console.log("Oopos, turning off now!");
+      initialTouch = false;
+      isHoveringOver = false;
+    }
+};
+
   var ctx = createCanvas.getContext('2d');
+
 
 // example: s is source, d is destination
 // createCanvas.drawImage(img, sx, sy, swidth, sheight, x, y, width, height);
@@ -43,18 +66,16 @@ console.log("Inside flowerAnim.onload");
 
 
 
-document.body.appendChild(createCanvas);
+  document.body.appendChild(createCanvas);
 
-document.getElementById("myCanvas").onmouseover = function() {
+  document.getElementById("myCanvas").onmouseover = function() {
   console.log("hover!");
   isHoveringOver = true;
-  anim();
   };
 
-document.getElementById("myCanvas").onmouseout  = function() {
+  document.getElementById("myCanvas").onmouseout  = function() {
   console.log("no more hover!");
   isHoveringOver = false;
-  anim();
   };
 
   //assigning the flower animation file source to variable fileName.
@@ -74,7 +95,7 @@ document.getElementById("myCanvas").onmouseout  = function() {
   }
   setIdentifyFileTrue();
 
-//This is the meat and potatoes
+  //This is the meat and potatoes with conditional statements working
   function anim(){
       if (identifyFile == true && isHoveringOver == true) {
 
